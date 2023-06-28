@@ -1,0 +1,32 @@
+<ul class="navbar-nav me-auto mb-2 mb-md-0">
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'main:clients_list' %}">Список клиентов</a>  <!-- динамическая ссылка на url -->
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'main:message_list' %}">Сообщения</a>  <!-- динамическая ссылка на url -->
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'main:sending_list' %}">Рассылки пользователям</a>  <!-- динамическая ссылка на url -->
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'main:attempt_list' %}">Статистика</a>  <!-- динамическая ссылка на url -->
+    </li>
+     <li class="nav-item">
+        <a class="nav-link" href="{% url 'blog:post_list' %}">Блог</a>  <!-- динамическая ссылка на url -->
+    </li>
+    {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'users:profile' %}">Профиль</a>  <!-- динамическая ссылка на url -->
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'users:logout' %}">Выйти</a>  <!-- динамическая ссылка на url -->
+        </li>
+    {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'users:register' %}">Регистрация</a>  <!-- динамическая ссылка на url -->
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'users:login' %}">Войти</a>  <!-- динамическая ссылка на url -->
+        </li>
+    {% endif %}
+</ul>

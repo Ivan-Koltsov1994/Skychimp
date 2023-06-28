@@ -1,0 +1,12 @@
+{% extends 'main/base.html' %} <!-- Выводит базовый html (верхняя, базовая часть сайта) -->
+{% block content %}  <!-- ШАБЛОННЫЙ ТЕГ for content -->
+<h1>Search Results</h1>
+
+<ul>
+  {% for clients in object_list %}
+    <li>
+      {{ clients.name }}, {{ clients.email }}
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}   <!-- закрытие ШАБЛОННЫЙ ТЕГ for content -->
