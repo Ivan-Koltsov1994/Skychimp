@@ -17,6 +17,11 @@
             </div>
         </div>
  </div>
-
+<div class="row gy-5">
+        <h1> Последние новости</h1>
+ {% for object in last_posts %}
+        {% include 'blog/includes/inc_post_card.html' %}
+{% endfor %}
+</div>
 
 {% endblock %}
