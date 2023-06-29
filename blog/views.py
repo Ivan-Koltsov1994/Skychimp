@@ -13,6 +13,8 @@ class PostListView(LoginRequiredMixin,ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         queryset = queryset.filter(published=True)
+        if self.request.user.has_perm('blog.can_change_post'):
+            return queryset
         return queryset
 
 

@@ -23,6 +23,12 @@ class Post(models.Model):
         verbose_name = 'Пост'
         verbose_name_plural = 'Посты'
         ordering = ('name','slug','-created_at',)
+        permissions = [
+            (
+                'can_change_post',
+                'Can change post'
+            ),
+        ]
 
 
     def increase_views(self):

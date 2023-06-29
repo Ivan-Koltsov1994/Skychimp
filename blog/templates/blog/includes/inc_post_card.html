@@ -11,7 +11,7 @@
                         </ul>
                         <p><img src="{% mediapath_post object.image %}" width="150" height="120" alt="Картинка"></p>
                         <p><a class="btn btn-secondary" href="{% url 'blog:post_item' object.slug %}" role="button">Посмотреть &raquo</a></p>
-                        {% if perms.blog.change_post %}
+                        {% if perms.blog.can_change_post %}
                         <p><a class="btn btn-warning" href="{% url 'blog:post_update' object.slug %}" role="button">Изменить &raquo;</a></p>
                         {% endif %}
                         {% if user.is_superuser %}

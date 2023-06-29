@@ -18,7 +18,7 @@
                             </ul>
                             <p><a class="btn btn-secondary" href="{% url 'main:message_view' object.pk %}">Посмотреть
                                 &raquo;</a></p>
-                            {% if user.is_authenticated and object.created_by == user or user.is_superuser %}
+                            {% if object.user == user or user.is_superuser %}
                             <p><a class="btn btn-warning" href="{% url 'main:message_update' object.pk %}">Изменить
                                 &raquo;</a></p>
                             <p><a class="btn btn-danger" href="{% url 'main:message_delete' object.pk %}">Удалить

@@ -10,8 +10,8 @@ class Clients(models.Model):
     name = models.CharField(max_length=150, verbose_name='имя', **NULLABLE)
     email = models.EmailField(max_length=150, verbose_name='почта', **NULLABLE)
     comment = models.TextField(verbose_name='комментарий', **NULLABLE)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Кем создан',
-                                   related_name='client')
+    created_by = models.ForeignKey('users.User', on_delete=models.CASCADE, verbose_name='Кем создан',
+                                   related_name='client', **NULLABLE)
 
     # поле определения активных клиентов
     is_active = models.BooleanField(default=True, verbose_name='активный')
@@ -42,6 +42,8 @@ class Message(models.Model):
     subject = models.CharField(max_length=150, verbose_name='тема письма')
     body = models.TextField(verbose_name='тело сообщения')
     created_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey('users.User', on_delete=models.CASCADE, verbose_name='Пользователь',
+                             **NULLABLE)
 
     class Meta:
         verbose_name = 'Сообщение'
@@ -79,7 +81,7 @@ class Sending(models.Model):
     scheduled_time = models.TimeField(auto_now_add=True, verbose_name='Время рассылки')
     frequency = models.CharField(max_length=20, choices=FREQUENCY_CHOICES, verbose_name='Периодичность')
     status = models.CharField(max_length=50, default='Создана', choices=SELECT_STATUS, verbose_name='Статус')
-    created = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Кем создано',
+    created = models.ForeignKey('users.User', on_delete=models.CASCADE, verbose_name='Кем создано',
                                 related_name='clients', **NULLABLE)
 
     def __str__(self):
