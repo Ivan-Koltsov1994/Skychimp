@@ -9,6 +9,10 @@ from blog.services import send_post_email
 
 class PostListView(LoginRequiredMixin,ListView):
     model = Post
+    extra_context = {
+        'message_list': Post.objects.all(),
+        'title': 'Лист блоговой информации'
+    }
 
     def get_queryset(self):
         queryset = super().get_queryset()
