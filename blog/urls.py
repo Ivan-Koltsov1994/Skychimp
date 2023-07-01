@@ -14,22 +14,20 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf import settings
-from django.conf.urls.static import static
-from django.contrib import admin
-from django.urls import path, include
+from django.contrib.auth.decorators import login_required
+from django.urls import path
 
-from blog.views import PostListView, PostDetailView, PostCreateView, PostUpdateView, PostDeleteView, toggle_publish
 from blog.apps import BlogConfig
-
+from blog.views import PostListView, PostDetailView, PostCreateView, PostUpdateView, PostDeleteView, toggle_publish
+from django.views.decorators.cache import never_cache, cache_page
 app_name = BlogConfig.name
 
 urlpatterns = [
-    path('blog/', PostListView.as_view(), name='post_list'),
-    path('blog/<slug:slug>/', PostDetailView.as_view(), name='post_item'),
-    path('create/', PostCreateView.as_view(), name='post_create'),
-    path('blog/update/<slug:slug>/', PostUpdateView.as_view(), name='post_update'),
-    path('blog/delete/<slug:slug>/', PostDeleteView.as_view(), name='post_delete'),
-    path('blog/toggle/<slug:slug>/', toggle_publish, name='toggle_publish')
+    path('blog/', cache_page(60)(PostListView.as_view()), name='post_list'),
+    path('blog/<slug:slug>/', never_cache(PostDetailView.as_view()), name='post_item'),
+    path('create/', never_cache(PostCreateView.as_view()), name='post_create'),
+    path('blog/update/<slug:slug>/', never_cache(PostUpdateView.as_view()), name='post_update'),
+    path('blog/delete/<slug:slug>/', never_cache(PostDeleteView.as_view()), name='post_delete'),
+    path('blog/toggle/<slug:slug>/', login_required(toggle_publish), name='toggle_publish')
 
 ]
