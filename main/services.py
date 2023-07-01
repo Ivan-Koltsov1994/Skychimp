@@ -22,10 +22,11 @@ def send_email_to_clients(*args):
     status_list = []  # Список статусов отправки сообщения
 
     for send in Sending.objects.all():
+        #проверяем периодичность отправки сообщения установленной в Crontab и статус сообщения
         if send.status == Sending.CREATED and send.frequency == (str(*args)):
             message_for_filter = send.message
-            message = Message.objects.filter(subject=message_for_filter)
-            for item in message:
+            message_list = Message.objects.filter(subject=message_for_filter)
+            for item in message_list:
                 try:
                     send_mail(
                         subject=item.subject,
@@ -48,9 +49,12 @@ def send_email_to_clients(*args):
                         'status': Attempt.NOT_DELIVERED,
                         'response': 'Ошибка при отправке сообщения: {}'.format(str(e)),
                     }
+
+
                     status_list.append(Attempt(**server_response))
                     Attempt.objects.bulk_create(status_list)
 
+                #Отправляем мгновенную рассылку
                 if send.frequency == Sending.ONCE:
                     send.status = Sending.COMPLETED
                     send.save()

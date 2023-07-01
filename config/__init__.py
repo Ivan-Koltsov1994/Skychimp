@@ -1,0 +1,2 @@
+def basestring():
+    return None
