@@ -6,7 +6,7 @@ from django.views.generic import TemplateView, ListView, DetailView, CreateView,
 from blog.models import Post
 from main.forms import ClientForms, MessageForms
 from main.models import Sending, Clients, Message, Attempt
-from main.services import send_email
+from main.services import send_email_to_clients
 
 
 # Create your views here.
@@ -123,8 +123,8 @@ class SendingCreateView(LoginRequiredMixin, CreateView):
     fields = ('message', 'frequency', 'status', 'created')
     success_url = reverse_lazy('main:sending_list')
 
-    # При установке флага отправки сообщения 1 раз - отправляем сообщение сразу
-    send_email(Sending.ONCE)
+    #При установке флага отправки сообщения 1 раз - отправляем сообщение сразу
+    send_email_to_clients(Sending.ONCE)
 
 
 class SendingUpdateView(UpdateView):

@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'django_crontab', #планировщик задач
 
     'main',
@@ -145,6 +146,13 @@ EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_USE_SSL = True
 EMAIL_USE_TLS = False
+
+# Настройки для планирования отправки сообщений
+CRONJOBS = [
+    ('0 12 * * *', 'main.cron.my_scheduled_sending', ['1 раз в день']),
+    ('0 12 * * 1', 'main.cron.my_scheduled_sending', ['1 раз в неделю']),
+    ('0 12 1 * *', 'main.cron.my_scheduled_sending', ['1 раз в месяц']),
+]
 
 # Настройки для работы с моделью пользователя
 AUTH_USER_MODEL = 'users.User'
