@@ -122,6 +122,8 @@ class SendingCreateView(LoginRequiredMixin, CreateView):
     model = Sending
     fields = ('message', 'frequency', 'status', 'created')
     success_url = reverse_lazy('main:sending_list')
+
+    # При установке флага отправки сообщения 1 раз - отправляем сообщение сразу
     send_email(Sending.ONCE)
 
 

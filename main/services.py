@@ -5,19 +5,20 @@ from main.models import Clients,Sending,Attempt,Message
 register = template.Library()
 
 
-def send_email(*args):
+def send_email_to_clients(*args):
+    """Отправляет рассылку клиентам"""
     all_email = []
-    for customer in Clients.objects.all():
-        all_email.append(str(customer.email))
+    for сlient in Clients.objects.all():
+        all_email.append(str(сlient.email))
 
     for send in Sending.objects.all():
         if send.status == Sending.CREATED and send.frequency == (str(*args)):
             message_for_filter = send.message
             message = Message.objects.filter(subject=message_for_filter)
-            for mes in message:
+            for item in message:
                 send_mail(
-                    subject=mes.subject,
-                    message=mes.body,
+                    subject=item.subject,
+                    message=item.body,
                     from_email=settings.EMAIL_HOST_USER,
                     recipient_list=[*all_email],
                 )
