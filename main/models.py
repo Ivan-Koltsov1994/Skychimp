@@ -1,9 +1,10 @@
-#Импортируем бибилотеку
+# Импортируем бибилотеку
 from django.db import models
 
 from config import settings
 
 NULLABLE = {'blank': True, 'null': True}
+
 
 class Clients(models.Model):
     """Класс для работы с моделью клиента сервиса"""
@@ -18,7 +19,6 @@ class Clients(models.Model):
 
     def __str__(self):
         return f'{self.email} ({self.name})'
-
 
     class Meta:
         """Класс мета-настроек"""
@@ -51,6 +51,7 @@ class Message(models.Model):
 
     def __str__(self):
         return self.subject
+
 
 class Sending(models.Model):
     """Класс для работы с моделью настройки Рассылки """

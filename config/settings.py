@@ -151,9 +151,9 @@ EMAIL_USE_TLS = False
 
 # Настройки для планирования отправки сообщений
 CRONJOBS = [
-    ('0 12 * * *', 'main.cron.my_scheduled_sending', ['1 раз в день']),
-    ('0 12 * * 1', 'main.cron.my_scheduled_sending', ['1 раз в неделю']),
-    ('0 12 1 * *', 'main.cron.my_scheduled_sending', ['1 раз в месяц']),
+    ('0 12 * * *', 'main.services.send_email_to_clients', ['1 раз в день']),
+    ('0 12 * * 1', 'main.services.send_email_to_clients', ['1 раз в неделю']),
+    ('0 12 1 * *', 'main.services.send_email_to_clients', ['1 раз в месяц']),
 ]
 
 # Настройки для работы с моделью пользователя

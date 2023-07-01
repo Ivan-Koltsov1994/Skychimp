@@ -123,7 +123,7 @@ class SendingCreateView(LoginRequiredMixin, CreateView):
     fields = ('message', 'frequency', 'status', 'created')
     success_url = reverse_lazy('main:sending_list')
 
-    #При установке флага отправки сообщения 1 раз - отправляем сообщение сразу
+    # При установке флага отправки сообщения 1 раз - отправляем сообщение сразу
     send_email_to_clients(Sending.ONCE)
 
 

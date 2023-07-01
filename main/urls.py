@@ -10,7 +10,6 @@ from main.views import IndexView, ClientListView, ClientDetailView, ClientCreate
 
 app_name = MainConfig.name
 
-
 urlpatterns = [
 
     path('', never_cache(IndexView.as_view()), name='Index'),
@@ -35,4 +34,4 @@ urlpatterns = [
     path('set_status_sending/<int:pk>', login_required(set_status_sending), name='set_status_sending'),
     path('set_is_active/<int:pk>', login_required(set_is_active), name='set_is_active'),
     path('search/', never_cache(SearchResultsView.as_view()), name='search_results'),
-            ]
+]
