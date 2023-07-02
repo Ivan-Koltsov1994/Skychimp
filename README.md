@@ -1,12 +1,13 @@
 # Курсовой проект по курсу 6.Django-разработка
 # Сервис рассылки сообщений Skychimp
 
+Скачайте на проект на локальный компьютер и установите виртуальное окружение
 ```bash
-python -m venv venv
+python -m env venv
 ```
 1. Активировать виртуальное окружение
 ```bash
-source env/bin/activate
+env/Scripts/activate 
 ```
 2. Установить зависимости проекта, указанные в файле `requirements.txt`
 ```bash
@@ -25,7 +26,7 @@ Redis-сервер запустится на стандартном порту 6
 ```bash
 redis-cli 
 ```
-6. Установить БД PostreSQL
+6. Установить БД PostreSQL, используйте wsl, терминал Ubuntu
 ```bash
 sudo apt-get install postgresql
 ```
