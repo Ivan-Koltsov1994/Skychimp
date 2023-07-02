@@ -12,7 +12,8 @@ def get_all_clients():
     all_email = []  # Список всех email клиентов
 
     for сlient in Clients.objects.all():
-        all_email.append(str(сlient.email))  # заполняем клиентов в список
+        if сlient.is_active:
+            all_email.append(str(сlient.email))  # заполняем активных клиентов в список
     return all_email
 
 

@@ -6,7 +6,7 @@ from main.apps import MainConfig
 from main.views import IndexView, ClientListView, ClientDetailView, ClientCreateView, ClientUpdateView, \
     ClientDeleteView, set_is_active, MessageListView, MessageDetailView, MessageCreateView, MessageUpdateView, \
     MessageDeleteView, SendingListView, SendingDetailView, SendingCreateView, SendingUpdateView, SendingDeleteView, \
-    AttemptListView, AttemptDetailView, set_status_sending, SearchResultsView
+    AttemptListView, AttemptDetailView, set_status_sending
 
 app_name = MainConfig.name
 
@@ -33,5 +33,4 @@ urlpatterns = [
 
     path('set_status_sending/<int:pk>', login_required(set_status_sending), name='set_status_sending'),
     path('set_is_active/<int:pk>', login_required(set_is_active), name='set_is_active'),
-    path('search/', never_cache(SearchResultsView.as_view()), name='search_results'),
 ]

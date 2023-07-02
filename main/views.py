@@ -176,7 +176,4 @@ def set_status_sending(request, pk):
     return redirect(reverse('main:sending_list'))
 
 
-class SearchResultsView(ListView):
-    model = Clients
-    template_name = 'search_results.html'
-    queryset = Clients.objects.filter()
+
