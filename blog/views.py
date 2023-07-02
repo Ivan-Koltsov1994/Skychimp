@@ -2,7 +2,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.postgres.search import SearchVector
 
+from blog.forms import SearchForm
 from blog.models import Post
 from blog.services import send_post_email
 
@@ -75,3 +77,21 @@ def toggle_publish(request, slug):
     post_item.save()
 
     return redirect(reverse('blog:blog_item', args=[post_item.slug]))
+
+
+def post_search(request):
+    form = SearchForm()
+    query = None
+    results = []
+    if 'query' in request.GET:
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            query = form.cleaned_data['query']
+            results = Post.objects.annotate(
+                search=SearchVector('name', 'content'),
+            ).filter(search=query)
+    return render(request,
+                  'blog/search.html',
+                  {'form': form,
+                   'query': query,
+                   'results': results})

@@ -18,7 +18,8 @@ from django.contrib.auth.decorators import login_required
 from django.urls import path
 
 from blog.apps import BlogConfig
-from blog.views import PostListView, PostDetailView, PostCreateView, PostUpdateView, PostDeleteView, toggle_publish
+from blog.views import PostListView, PostDetailView, PostCreateView, PostUpdateView, PostDeleteView, toggle_publish, \
+    post_search
 from django.views.decorators.cache import never_cache, cache_page
 app_name = BlogConfig.name
 
@@ -28,6 +29,7 @@ urlpatterns = [
     path('create/', never_cache(PostCreateView.as_view()), name='post_create'),
     path('blog/update/<slug:slug>/', never_cache(PostUpdateView.as_view()), name='post_update'),
     path('blog/delete/<slug:slug>/', never_cache(PostDeleteView.as_view()), name='post_delete'),
-    path('blog/toggle/<slug:slug>/', login_required(toggle_publish), name='toggle_publish')
+    path('blog/toggle/<slug:slug>/', login_required(toggle_publish), name='toggle_publish'),
+    path('blog/search/', post_search, name='post_search'),
 
 ]
