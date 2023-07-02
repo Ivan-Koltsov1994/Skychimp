@@ -165,7 +165,7 @@ LOGOUT_REDIRECT_URL = '../'
 LOGIN_URL = '/users/'
 
 # Настройки кеширования
-CACHE_ENABLED = True
+CACHE_ENABLED = os.getenv('CACHE_ENABLED')
 
 if CACHE_ENABLED:
     CACHES = {
