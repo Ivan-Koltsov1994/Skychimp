@@ -9,7 +9,7 @@ from blog.models import Post
 from blog.services import send_post_email
 
 
-class PostListView(LoginRequiredMixin,ListView):
+class PostListView(LoginRequiredMixin, ListView):
     model = Post
     extra_context = {
         'message_list': Post.objects.all(),

@@ -165,7 +165,7 @@ def set_is_active(request, pk):
     return redirect(reverse('main:clients_list'))
 
 
-def set_status_sending(request, pk):
+def set_status_sending(pk):
     sending_item = get_object_or_404(Sending, pk=pk)
     if sending_item.status == Sending.CREATED:
         sending_item.status = Sending.COMPLETED
@@ -174,6 +174,3 @@ def set_status_sending(request, pk):
         sending_item.status = Sending.CREATED
         sending_item.save()
     return redirect(reverse('main:sending_list'))
-
-
-

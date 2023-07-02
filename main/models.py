@@ -1,7 +1,6 @@
 # Импортируем бибилотеку
 from django.db import models
 
-from config import settings
 
 NULLABLE = {'blank': True, 'null': True}
 

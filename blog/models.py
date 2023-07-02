@@ -5,10 +5,11 @@ from transliterate import translit
 
 NULLABLE = {'blank': True, 'null': True}
 
+
 class Post(models.Model):
     """Класс для работы с моделью Постов"""
     name = models.CharField(max_length=150, verbose_name='заголовок')
-    slug = models.CharField(max_length=150, unique=True,  verbose_name='slug')
+    slug = models.CharField(max_length=150, unique=True, verbose_name='slug')
     content = models.TextField(verbose_name='содержимое')
     image = models.ImageField(upload_to='post/', verbose_name='изображение', **NULLABLE)
     created_at = models.DateTimeField(verbose_name='дата создания', auto_now_add=True)
@@ -22,14 +23,13 @@ class Post(models.Model):
         """Класс мета настроек"""
         verbose_name = 'Пост'
         verbose_name_plural = 'Посты'
-        ordering = ('name','slug','-created_at',)
+        ordering = ('name', 'slug', '-created_at',)
         permissions = [
             (
                 'can_change_post',
                 'Can change post'
             ),
         ]
-
 
     def increase_views(self):
         # Метод увеличивает количество просмотров

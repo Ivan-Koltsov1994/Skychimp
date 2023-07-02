@@ -13,19 +13,23 @@ from users.models import User
 from users.services import confirm_account
 
 
-class ProfileUpdateView(LoginRequiredMixin,UpdateView):
+class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = User
     form_class = UserChangeForm
     success_url = reverse_lazy('main:Index')
 
-
     def get_object(self, queryset=None):
         return self.request.user
+
 
 class RegisterView(CreateView):
     model = User
     form_class = UserRegisterForm
     success_url = f'/users/page_after_registration/'
+
+    def __init__(self, **kwargs):
+        super().__init__(kwargs)
+        self.user_token = None
 
     def form_valid(self, form):
         if form.is_valid():
