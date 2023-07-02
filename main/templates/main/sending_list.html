@@ -2,7 +2,7 @@
 {% block content %}  <!-- ШАБЛОННЫЙ ТЕГ for content -->
     <main>
         <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-            <div class="col-12">   <!-- кнопка Создать студента -->
+            <div class="col-12">   <!-- кнопка Создать рассылку -->
                 <a href="{% url 'main:sending_create' %}" class="btn btn-primary m-2">Создать рассылку</a>
             </div>
             {% for object in object_list %}
@@ -39,4 +39,22 @@
             {% endfor %}
         </div>
     </main>
+ <style>
+        .btn {
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+    </style>
 {% endblock %}   <!-- закрытие ШАБЛОННЫЙ ТЕГ for content -->
