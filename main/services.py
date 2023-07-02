@@ -42,6 +42,7 @@ def send_email_to_clients(*args):
                     }
                     status_list.append(Attempt(**server_response))
                     Attempt.objects.bulk_create(status_list)
+                    print(f'Сообщение успешно отправлено {Sending.objects.get(pk=send.id)}')
 
                 except Exception as e:
                     server_response = {
@@ -49,12 +50,13 @@ def send_email_to_clients(*args):
                         'status': Attempt.NOT_DELIVERED,
                         'response': 'Ошибка при отправке сообщения: {}'.format(str(e)),
                     }
+                    print(f'Ошибка при отправке сообщений {Sending.objects.get(pk=send.id)}')
 
 
                     status_list.append(Attempt(**server_response))
                     Attempt.objects.bulk_create(status_list)
 
-                #Отправляем мгновенную рассылку
+                #Отправляем мгновенную рассылку при разовом значении
                 if send.frequency == Sending.ONCE:
                     send.status = Sending.COMPLETED
                     send.save()
