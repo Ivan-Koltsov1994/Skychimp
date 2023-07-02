@@ -14,7 +14,7 @@ urlpatterns = [
 
     path('', never_cache(IndexView.as_view()), name='Index'),
     path('clients/', cache_page(60)(ClientListView.as_view()), name='clients_list'),
-    path('<int:pk>/', cache_page(60)(ClientDetailView.as_view()), name='clients_detail'),
+    path('<int:pk>/', never_cache(ClientDetailView.as_view()), name='clients_detail'),
     path('clients/create/', never_cache(ClientCreateView.as_view()), name='clients_create'),
     path('clients/update/<int:pk>/', never_cache(ClientUpdateView.as_view()), name='clients_update'),
     path('customer/delete/<int:pk>/', never_cache(ClientDeleteView.as_view()), name='clients_delete'),
