@@ -63,6 +63,11 @@ sudo service cron start
 ```bash
  python manage.py sending
 ```
+- **Разовые рассылки отправляются автоматически**
+- **Настройки периодических рассылок содержатся в файле settings.py**
+![img.png](img.png)
+
+
 
 # Курсовой проект по Django
 
