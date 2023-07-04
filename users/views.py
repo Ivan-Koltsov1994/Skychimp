@@ -28,7 +28,7 @@ class RegisterView(CreateView):
     success_url = f'/users/page_after_registration/'
 
     def __init__(self, **kwargs):
-        super().__init__(kwargs)
+        super().__init__(**kwargs)
         self.user_token = None
 
     def form_valid(self, form):
