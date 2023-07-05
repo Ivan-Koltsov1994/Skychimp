@@ -1,0 +1,27 @@
+{% extends 'main/base.html' %} <!-- Выводит базовый html (верхняя, базовая часть сайта) -->
+{% load sending_count %}
+{% load active_sending_count %}
+{% load active_clients_count %}
+{% block content %}
+ <div class="row gy-5">
+        <h1> Сервис Skychimp</h1>
+     <div class="col">
+            <div class="shadow-lg p-3 mb-5 bg-white rounded">
+                <figure class="p-3 mb-0">
+                    Создано рассылок: {% sending_count %}.<br>
+                    <br>
+                    Количество активных рассылок: {% active_sending_count %}.<br>
+                    <br>
+                    Количество уникальных клиентов: {% active_clients_count %}
+                </figure>
+            </div>
+        </div>
+ </div>
+<div class="row gy-5">
+        <h1> Последние новости</h1>
+ {% for object in last_posts %}
+        {% include 'blog/includes/inc_post_card.html' %}
+{% endfor %}
+</div>
+
+{% endblock %}

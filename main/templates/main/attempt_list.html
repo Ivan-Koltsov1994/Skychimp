@@ -1,0 +1,45 @@
+{% extends 'main/base.html' %}
+{% block content %}
+    <main>
+        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+            {% for object in object_list %}
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <div class="card-header py-3">
+                            <h5 class="my-0 fw-normal">{{ object.sending }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li class="card-title pricing-card-title">{{ object.sent_at }}</li>
+                            </ul>
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li class="card-title pricing-card-title">{{ object.status }}</li>
+                            </ul>
+                            <p><a class="btn btn-secondary" href="{% url 'main:attempt_view' object.pk %}">Посмотреть
+                                &raquo;</a></p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+ <style>
+        .btn {
+            margin-top: 5px;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+{% endblock %}   <!-- закрытие ШАБЛОННЫЙ ТЕГ for content -->

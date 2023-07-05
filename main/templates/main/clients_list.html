@@ -1,0 +1,61 @@
+{% extends 'main/base.html' %} <!-- Выводит базовый html (верхняя, базовая часть сайта) -->
+{% load mediapath %}
+{% block content %}  <!-- ШАБЛОННЫЙ ТЕГ for content -->
+    <main>
+        <div class="pricing-header px-1 py-1 pt-md-1 pb-md-1 mx-auto text-center">
+            <img class="rounded-circle" src="{% mediapath 'main/clients.jpg' %}" alt="Картинка" width="800" height="600">
+        </div>
+        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+
+            <div class="col-12">   <!-- кнопка Создать студента -->
+                {% if user.is_authenticated  or user.is_superuser %}
+                <a href="{% url 'main:clients_create' %}" class="btn btn-primary m-2">Создать клиента</a>
+                {% endif %}
+            </div>
+            {% for object in object_list %}
+                {% if  object.created_by == user or user.is_superuser or  perms.main.can_view_client %}
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-sm">
+                            <div class="card-header py-3">
+                                <h5 class="my-0 fw-normal">{{ object.name }}</h5>
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title pricing-card-title">{{ object.email }}</h6>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li class="card-title pricing-card-title">{{ object.message }}</li>
+                                </ul>
+                                <p><a class="btn btn-secondary" href="{% url 'main:clients_detail' object.pk %}">Посмотреть
+                                    &raquo;</a></p>
+                                {%endif%}
+                                {% if object.created_by == user or user.is_superuser %}
+                                    <p><a class="btn btn-warning" href="{% url 'main:clients_update' object.pk %}">Изменить
+                                        &raquo;</a></p>
+                                    <p><a class="btn btn-danger" href="{% url 'main:clients_delete' object.pk %}">Удалить
+                                        &raquo;</a></p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+            {% endfor %}
+        </div>
+    </main>
+ <style>
+        .btn {
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+{% endblock %}   <!-- закрытие ШАБЛОННЫЙ ТЕГ for content -->
